@@ -1,0 +1,23 @@
+spring:
+  application: { name: tabaco-tracker-api }
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/tabaco_tracker}
+    username: ${SPRING_DATASOURCE_USERNAME:tabaco}
+    password: ${SPRING_DATASOURCE_PASSWORD:tabaco123}
+    hikari: { maximum-pool-size: 10 }
+  jpa:
+    hibernate: { ddl-auto: validate }
+    show-sql: false
+  flyway: { enabled: true, locations: classpath:db/migrations, baseline-on-migrate: true }
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST:localhost}
+      port: 6379
+      timeout: 2000ms
+
+server: { port: 8080 }
+jwt: { secret: ${JWT_SECRET:dev-secret-change-in-prod} }
+
+camel:
+  springboot:
+    main-run-controller: true
